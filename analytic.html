@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="asset\img\Lavito.png" type="image/png">
+    <link rel="stylesheet" href="asset/css/style2.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container-aja {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px 20px;
+        }
+        .analytics-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1 1 300px;
+        }
+        .card h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-bg">
+
+
+        <nav class=" navbar navbar-expand-lg nav2 navbar-dark fixed-top bg-putih">
+            <div class="container">
+               
+             <h1 class="text-white">LAVITO</h1>
+    
+    
+                <button class="navbar-toggler" style="color:#ffffff;" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavAltMarkup" aria-expanded="true"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+    
+                <div class="collapse navbar-collapse " id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto menu2">
+                        <li class="nav-item"><a class="nav-link mx-lg-3 text-white" href="/index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link mx-lg-3 text-white" href="/blog/blog.html">Article</a></li>
+                        <li class="nav-item"><a class="nav-link mx-lg-3 text-white" href="/koleksi.html">Koleksi</a></li>
+    
+    
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+       
+    </div>
+
+<div class="container-aja">
+    <div class="analytics-section">
+        <!-- Line Chart -->
+        <div class="card">
+            <h2>Jumlah Pengunjung Fasilitas Umum - Januari 2024</h2>
+            <canvas id="visitorChart"></canvas>
+        </div>
+
+        <!-- Doughnut Chart -->
+        <div class="card">
+            <h2>Quick Stats</h2>
+            <canvas id="quickStatsChart"></canvas>
+        </div>
+
+        <!-- Calendar Section (Static) -->
+        <div class="card">
+            <h2>Calendar Highlights</h2>
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+                    <tr><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
+                    <tr><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr>
+                    <tr><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr>
+                    <tr><td>29</td><td>30</td><td>31</td><td></td><td></td><td></td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="card">
+            <h2>Monthly User Growth</h2>
+            <canvas id="growthChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (for navbar toggle functionality) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<script>
+    // Visitor Chart (Line)
+    const visitorCtx = document.getElementById('visitorChart').getContext('2d');
+    new Chart(visitorCtx, {
+        type: 'line',
+        data: {
+            labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'],
+            datasets: [
+                {
+                    label: 'Perpustakaan',
+                    data: [220, 180, 210, 250, 270],
+                    borderColor: '#40E0D0',
+                    backgroundColor: 'rgba(64, 224, 208, 0.2)',
+                    tension: 0.4
+                },
+                {
+                    label: 'Kantor Pos',
+                    data: [210, 190, 250, 200, 190],
+                    borderColor: '#FFD700',
+                    backgroundColor: 'rgba(255, 215, 0, 0.2)',
+                    tension: 0.4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: false,
+                    title: {
+                        display: true,
+                        text: 'Jumlah Pengunjung'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Hari'
+                    }
+                }
+            }
+        }
+    });
+
+    const quickStatsCtx = document.getElementById('quickStatsChart').getContext('2d');
+    new Chart(quickStatsCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Perpustakaan', 'Kantor Pos', 'Lainnya'],
+            datasets: [{
+                data: [65, 75, 85],
+                backgroundColor: ['#40E0D0', '#FFD700', '#FF6347'],
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+
+    const growthCtx = document.getElementById('growthChart').getContext('2d');
+    new Chart(growthCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+            datasets: [{
+                label: 'User Growth',
+                data: [3.8, 2.9, 4.5, 3.6, 3.7, 3.2, 4.1, 3.9],
+                backgroundColor: '#FF6347',
+                borderColor: '#FF4500',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Growth Percentage (%)'
+                    }
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
